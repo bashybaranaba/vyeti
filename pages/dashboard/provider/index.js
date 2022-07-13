@@ -52,6 +52,27 @@ export default function ProviderDashboard({ provider, programmes }) {
     setOpen(false);
   };
 
+  const getActiveProgrammes = (programmes) => {
+    let programmesArray = [];
+    for (let i = 0; i < programmes.length; i++) {
+      if (programmes[i].is_archived === false) {
+        programmesArray.push(programmes[i]);
+      }
+    }
+    return programmesArray;
+  };
+  const getArchivedProgrammes = (programmes) => {
+    let archivedArray = [];
+    for (let i = 0; i < programmes.length; i++) {
+      if (programmes[i].is_archived === true) {
+        archivedArray.push(programmes[i]);
+      }
+    }
+    return archivedArray;
+  };
+  const activeProgrammes = getActiveProgrammes(programmes);
+  const archivedProgrammes = getArchivedProgrammes(programmes);
+
   const handleChangeValue = (event, newValue) => {
     setValue(newValue);
   };
@@ -133,9 +154,11 @@ export default function ProviderDashboard({ provider, programmes }) {
           </div>
           <div hidden={value !== 1}>
             <CreateProgramme providerId={provider._id} />
-            <ProgrammeList programmes={programmes} />
+            <ProgrammeList programmes={activeProgrammes} />
           </div>
-          <div hidden={value !== 2}>Archived Items</div>
+          <div hidden={value !== 2}>
+            <ProgrammeList programmes={archivedProgrammes} />
+          </div>
           <div hidden={value !== 3}>Sth</div>
           <div hidden={value !== 4}>Archived</div>
         </Box>
@@ -176,12 +199,12 @@ export const getServerSideProps = async ({ req }) => {
     };
   } else {
     const account = await axios.get(
-      `https://vyeti.com/api/accounts/providers/${account_id}`
+      `http://localhost:3000/api/accounts/providers/${account_id}`
     );
     const providerId = account.data.provider._id;
 
     const res = await axios.get(
-      `https://vyeti.com/api/providers/${providerId}`
+      `http://localhost:3000/api/providers/${providerId}`
     );
     return {
       props: {

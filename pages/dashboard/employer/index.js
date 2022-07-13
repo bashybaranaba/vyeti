@@ -172,14 +172,16 @@ export const getServerSideProps = async ({ req }) => {
     };
   } else {
     const account = await axios.get(
-      `https://vyeti.com/api/accounts/employers/${account_id}`
+      `http://localhost:3000/api/accounts/employers/${account_id}`
     );
     const employerId = account.data.employer._id;
 
     const res = await axios.get(
-      `https://vyeti.com/api/employers/${employerId}`
+      `http://localhost:3000/api/employers/${employerId}`
     );
-    const credentials = await axios.get(`https://vyeti.com/api/credentials`);
+    const credentials = await axios.get(
+      `http://localhost:3000/api/credentials`
+    );
 
     return {
       props: {

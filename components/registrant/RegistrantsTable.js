@@ -1,6 +1,7 @@
 import React from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import CreateCredential from "../credential/CreateCredential";
+import DeleteRegistrant from "./DeleteRegistrant";
 import dayjs from "dayjs";
 
 const columns = [
@@ -22,6 +23,12 @@ const columns = [
   { headerName: "Birth Cert No", field: "birthCertNo", width: 100 },
   { headerName: "National ID", field: "nationalId", width: 100 },
   { headerName: "Passport", field: "passport", width: 100 },
+  {
+    field: "deletebutton",
+    headerName: "Delete",
+    width: 64,
+    renderCell: (params) => <DeleteRegistrant registrantId={params.value} />,
+  },
 ];
 
 function createData(
@@ -37,7 +44,8 @@ function createData(
   dob,
   birthCertNo,
   nationalId,
-  passport
+  passport,
+  deletebutton
 ) {
   return {
     id,
@@ -53,6 +61,7 @@ function createData(
     birthCertNo,
     nationalId,
     passport,
+    deletebutton,
   };
 }
 
@@ -71,7 +80,8 @@ export default function RegistrantsTable({ registrants }) {
       dayjs(registrant.date_of_birth).format("MMMM DD YYYY"),
       registrant.birth_certificate,
       registrant.national_id,
-      registrant.passport_no
+      registrant.passport_no,
+      registrant._id
     )
   );
   return (

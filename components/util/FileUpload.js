@@ -10,7 +10,6 @@ import Paper from "@mui/material/Paper";
 import { useState } from "react";
 import { create as ipfsHttpClient } from "ipfs-http-client";
 import ClearIcon from "@mui/icons-material/Clear";
-import CameraEnhanceIcon from "@mui/icons-material/CameraEnhance";
 import TextField from "@mui/material/TextField";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 

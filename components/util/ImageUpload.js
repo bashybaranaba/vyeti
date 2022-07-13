@@ -34,13 +34,14 @@ export default function ImageUpload({ setFileUrl, fileUrl }) {
             src={fileUrl}
           />
 
-          <Tooltip title="change image file" placement="top">
+          <Tooltip title="change image file" placement="bottom">
             <label htmlFor="file-input">
               <Fab
                 size="small"
                 color="primary"
                 aria-label="clear"
                 sx={{ mt: -7, ml: 7 }}
+                component="div"
               >
                 <EditIcon />
               </Fab>

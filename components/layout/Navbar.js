@@ -21,12 +21,27 @@ export default function Navbar() {
     <div>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
-          <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              VYETI .
-            </Typography>
-            {authenticated ? <LogOutButton /> : <WalletLogin />}
-          </Toolbar>
+          {authenticated ? (
+            <Toolbar>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                VYETI .
+              </Typography>
+              <Typography variant="h6" component="div">
+                Register
+              </Typography>
+              <LogOutButton />
+            </Toolbar>
+          ) : (
+            <Toolbar>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                VYETI .
+              </Typography>
+              <Typography variant="h6" component="div">
+                Register
+              </Typography>
+              <WalletLogin />
+            </Toolbar>
+          )}
         </AppBar>
       </Box>
     </div>

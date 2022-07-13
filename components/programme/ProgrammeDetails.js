@@ -5,8 +5,6 @@ import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 
-import VerifiedIcon from "@mui/icons-material/Verified";
-
 export default function ProgrammeDetails({ programme }) {
   return (
     <div>
@@ -15,7 +13,11 @@ export default function ProgrammeDetails({ programme }) {
           <Typography variant="h3" sx={{ m: 2 }}>
             {programme.programme_name}
           </Typography>
-
+          {programme.is_archived ? (
+            <Typography variant="body2" color="text.secondary" sx={{ m: 2 }}>
+              * This Programme is currently archived and you alone can view it
+            </Typography>
+          ) : null}
           <Box sx={{ display: "flex", ml: 1 }}>
             <Typography variant="body1" sx={{ fontWeight: 600, m: 1 }}>
               Programme by
@@ -30,12 +32,7 @@ export default function ProgrammeDetails({ programme }) {
               </Typography>
             </Link>
           </Box>
-          <Box sx={{ display: "flex", ml: 1 }}>
-            <VerifiedIcon sx={{ color: "#26c6da", m: 1 }} />
-            <Typography variant="body1" sx={{ m: 1, ml: 0 }}>
-              Is accredited
-            </Typography>
-          </Box>
+
           <Paper sx={{ backgroundColor: "#eeeeee", m: 2, p: 2 }}>
             <Typography variant="h5" sx={{ m: 2 }}>
               Description

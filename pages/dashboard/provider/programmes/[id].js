@@ -16,7 +16,8 @@ import ArchiveIcon from "@mui/icons-material/Archive";
 import DashboardButton from "../../../../components/util/DashboardButton";
 import EditProgramme from "../../../../components/programme/EditProgramme";
 import RegistrantsTable from "../../../../components/registrant/RegistrantsTable";
-
+import ArchiveProgramme from "../../../../components/programme/ArchiveProgramme";
+import UnarchiveProgramme from "../../../../components/programme/UnarchiveProgramme";
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
@@ -47,18 +48,14 @@ export default function Programme({ programme, registrants }) {
             providerId={programme.provider._id}
           />
         </Box>
-
         <Box sx={{ mt: 10, position: "fixed" }}>
-          <Tooltip title="archive programme">
-            <Fab
-              href="/dashboard"
-              aria-label="dashboard"
-              sx={{ bgcolor: "#fff", color: "#009688", m: 2 }}
-            >
-              <ArchiveIcon />
-            </Fab>
-          </Tooltip>
+          {programme.is_archived ? (
+            <UnarchiveProgramme programmeId={programme._id} />
+          ) : (
+            <ArchiveProgramme programmeId={programme._id} />
+          )}
         </Box>
+
         <Box sx={{ mt: 20, position: "fixed" }}>
           <DashboardButton link={"/dashboard/provider"} />
         </Box>
@@ -105,7 +102,9 @@ export default function Programme({ programme, registrants }) {
 }
 
 export const getServerSideProps = async ({ params }) => {
-  const res = await axios.get(`https://vyeti.com/api/programmes/${params.id}`);
+  const res = await axios.get(
+    `http://localhost:3000/api/programmes/${params.id}`
+  );
   return {
     props: {
       programme: res.data.programme,
