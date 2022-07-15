@@ -18,6 +18,7 @@ const columns = [
       <a
         style={{ textDecoration: "none", color: "#4D776D" }}
         href={`/credentials/${params.value}`}
+        target="blank"
       >
         View
       </a>
@@ -52,7 +53,7 @@ export default function DataTable({ credentials }) {
     )
   );
   return (
-    <div style={{ height: 550, width: "100%" }}>
+    <div style={{ height: 500, width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}

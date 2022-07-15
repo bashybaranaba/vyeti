@@ -39,6 +39,7 @@ export default function VerifyCredential({ credential, data }) {
               Institution name:{" "}
               <a
                 href={`/org/${data.institution.slug}`}
+                target="blank"
                 style={{ color: "#4D776D" }}
               >
                 {data.institution?.institution_name}
@@ -57,6 +58,7 @@ export default function VerifyCredential({ credential, data }) {
               <a
                 href={`/programme/${data.programme._id}`}
                 style={{ color: "#4D776D" }}
+                target="blank"
               >
                 {data.programme?.programme_name}
               </a>

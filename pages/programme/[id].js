@@ -22,11 +22,7 @@ export default function Programme({ programme }) {
       </Head>
       <Navbar />
       <ProgrammeDetails programme={programme} />
-      <Container maxWidth="md">
-        <Box sx={{ mt: 4, ml: 1, mr: 3 }}>
-          <SearchCredential />
-        </Box>
-      </Container>
+      <Container maxWidth="md"></Container>
     </div>
   );
 }

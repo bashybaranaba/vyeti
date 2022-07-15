@@ -54,12 +54,29 @@ export default function Navbar({ displayname }) {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>
-        Register as Issuing Institution
+        <a
+          style={{ color: "black", textDecoration: "none" }}
+          href="/register/provider"
+        >
+          Register as Issuing Institution
+        </a>
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
-        Register as Hiring Institution
+        <a
+          style={{ color: "black", textDecoration: "none" }}
+          href="/register/employer"
+        >
+          Register as Hiring Institution
+        </a>
       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>Register as an Individual</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <a
+          style={{ color: "black", textDecoration: "none" }}
+          href="/register/earner"
+        >
+          Register as an Individual{" "}
+        </a>
+      </MenuItem>
     </Menu>
   );
 
