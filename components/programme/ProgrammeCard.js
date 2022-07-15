@@ -12,6 +12,7 @@ export default function ProgrammeCard({ programme }) {
     <Grid item xs={12} sm={6} lg={4}>
       <Card elevation={3} sx={{ borderRadius: 2 }}>
         <CardActionArea
+          target="blank"
           href={`/dashboard/provider/programmes/${programme._id}`}
         >
           <Box sx={{ backgroundColor: "#4D776D", height: 30 }} />
