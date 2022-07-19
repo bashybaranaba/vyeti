@@ -22,15 +22,29 @@ import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import BasicDatePicker from "../util/BasicDatePicker";
 import PopUpAlert from "../util/PopUpAlert";
 
-export default function CreateRegistrant({ providerId, programmeId }) {
+export default function CreateRegistrant({
+  providerId,
+  programmeId,
+  duration,
+}) {
+  const timeMeasure = duration.measure;
+  const timeQuantity = duration.quantity;
+  const currentDate = new Date();
+  const initialExpectedDate =
+    timeMeasure == "days"
+      ? currentDate.setDate(currentDate.getDate() + timeQuantity)
+      : timeMeasure == "months"
+      ? currentDate.setMonth(currentDate.getMonth() + timeQuantity)
+      : currentDate.setFullYear(currentDate.getFullYear() + timeQuantity);
+
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
   const [admission, setAdmission] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [enrollment, setEnrollment] = useState(null);
-  const [expCompletion, setExpCompletion] = useState(null);
+  const [enrollment, setEnrollment] = useState(new Date());
+  const [expCompletion, setExpCompletion] = useState(initialExpectedDate);
   const [dob, setDob] = useState(null);
   const [birthCert, setBirthCert] = useState("");
   const [passport, setPassport] = useState("");

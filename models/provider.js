@@ -6,10 +6,12 @@ const providerSchema = new mongoose.Schema(
     institution_name: {
       type: String,
       required: [true, "Please enter the institution name"],
+      minLength: [2, "Institution Name should contain at least two characters"],
     },
     contact_person: {
       type: String,
       required: [true, "Please enter your full name"],
+      minLength: [2, "Full Name should contain at least two characters"],
     },
     accountId: {
       type: ObjectId,
@@ -32,6 +34,7 @@ const providerSchema = new mongoose.Schema(
     phone: {
       type: String,
       required: [true, "Please provide telephone or mobile number"],
+      minLength: [7, "Phone number length is shorter than expected"],
     },
     physical_address: {
       type: String,

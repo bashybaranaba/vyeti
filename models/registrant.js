@@ -6,6 +6,7 @@ const registrantSchema = new mongoose.Schema(
     fullname: {
       type: String,
       required: [true, "Please enter registrant's full name"],
+      minLength: [2, "Full Name should contain at least two characters"],
     },
     email: {
       type: String,

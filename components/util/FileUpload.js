@@ -30,8 +30,8 @@ export default function FileUpload({ getFileDetails }) {
 
       const url = `https://ipfs.infura.io/ipfs/${added.path}`;
       const fileDetails = {
-        fileUrl: url,
-        fileType: type_of_file,
+        file_url: url,
+        file_type: type_of_file,
         description: fileName,
       };
       setFileUrl(url);
@@ -130,13 +130,7 @@ export default function FileUpload({ getFileDetails }) {
               </Typography>
             </Container>
           </Box>
-          <input
-            type="file"
-            accept="image/*"
-            id="file-input"
-            hidden
-            onChange={uploadFile}
-          />
+          <input type="file" id="file-input" hidden onChange={uploadFile} />
         </div>
       )}
     </div>

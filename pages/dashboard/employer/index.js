@@ -75,7 +75,6 @@ export default function EmloyerDashboard({ employer, credentials }) {
               {...a11yProps(1)}
               sx={{ ml: 2 }}
             />
-            <Tab label="Individual Reports" {...a11yProps(2)} sx={{ ml: 2 }} />
           </Tabs>
         </Box>
       </Container>
@@ -89,15 +88,6 @@ export default function EmloyerDashboard({ employer, credentials }) {
           <Box sx={{ mr: 2, ml: 2 }}>
             <DataTable credentials={credentials} />
           </Box>
-        </Container>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <Container maxWidth="lg">
-          <Container align="center" sx={{ mr: 2, ml: 2 }}>
-            <Typography variant="subtitle1" color="text.secondary">
-              Search for Individual and Get Report on Their Qualification
-            </Typography>
-          </Container>
         </Container>
       </TabPanel>
     </div>

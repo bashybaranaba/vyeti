@@ -83,11 +83,13 @@ export default function Navbar({ displayname }) {
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar pposition="fixed">
           {authenticated ? (
             <Toolbar>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                VYETI .
+                <a href="/" style={{ textDecoration: "none", color: "#fff" }}>
+                  VYETI .
+                </a>
               </Typography>
 
               <Typography variant="body1" component="div" sx={{ mr: 1 }}>
@@ -99,7 +101,9 @@ export default function Navbar({ displayname }) {
           ) : (
             <Toolbar>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                VYETI .
+                <a href="/" style={{ textDecoration: "none", color: "#fff" }}>
+                  VYETI .
+                </a>
               </Typography>
               <Button onClick={handleMenuOpen} color="inherit">
                 Register
@@ -110,6 +114,7 @@ export default function Navbar({ displayname }) {
           )}
         </AppBar>
       </Box>
+      <Box sx={{ m: 12 }} />
     </div>
   );
 }

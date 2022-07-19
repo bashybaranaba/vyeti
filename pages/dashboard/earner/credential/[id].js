@@ -26,7 +26,9 @@ export default function CredentialPage({ tokenId, data }) {
   }, []);
   async function loadCredentials() {
     /* create a generic provider and query for unsold market items */
-    const provider = new ethers.providers.JsonRpcProvider();
+    const provider = new ethers.providers.JsonRpcProvider(
+      "https://rpc-mumbai.maticvigil.com"
+    );
     const contract = new ethers.Contract(
       credentialsRegistryAddress,
       CredentialRegistry.abi,
@@ -72,7 +74,7 @@ export default function CredentialPage({ tokenId, data }) {
       <Navbar />
       <Box sx={{ m: 2 }}>
         <Box sx={{ position: "fixed" }}>
-          <ShareButton link={`http://localhost:3000/credentials/${tokenId}`} />
+          <ShareButton link={`https://vyeti.com/credentials/${tokenId}`} />
         </Box>
         <Box sx={{ mt: 10, position: "fixed" }}>
           <DashboardButton link={"/dashboard/earner"} />

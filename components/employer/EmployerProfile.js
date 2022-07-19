@@ -37,10 +37,10 @@ export default function EmployerProfile({ employer }) {
             About
           </Typography>
 
-          {employer.description ? (
-            <Box sx={{ textAlign: "justify" }}>
+          {employer.bio ? (
+            <Box sx={{ mr: 10, textAlign: "justify" }}>
               <Typography variant="body1" sx={{ m: 2 }}>
-                {employer.description}
+                {employer.bio}
               </Typography>
             </Box>
           ) : (

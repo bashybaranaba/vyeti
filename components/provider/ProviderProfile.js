@@ -9,6 +9,7 @@ import VerifiedIcon from "@mui/icons-material/Verified";
 import EditProvider from "./EditProvider";
 import Accredit from "./Accredit";
 import ReportGmailerrorredIcon from "@mui/icons-material/ReportGmailerrorred";
+import Accreditation from "./Accreditation";
 
 export default function ProviderProfile({ provider, credentials, programmes }) {
   return (
@@ -103,6 +104,11 @@ export default function ProviderProfile({ provider, credentials, programmes }) {
           )}
         </Paper>
       </Box>
+      {provider.is_accredited ? (
+        <Box sx={{ mt: 4, ml: 1 }}>
+          <Accreditation documents={provider.documents} />
+        </Box>
+      ) : null}
     </Container>
   );
 }

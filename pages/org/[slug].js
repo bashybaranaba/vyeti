@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import axios from "axios";
+import { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -13,8 +14,25 @@ import LanguageIcon from "@mui/icons-material/Language";
 
 import VerifiedIcon from "@mui/icons-material/Verified";
 import Navbar from "../../components/layout/Navbar";
+import Accreditation from "../../components/provider/Accreditation";
 
 export default function Organization({ provider, programmes }) {
+  const [analytics, setAnalytics] = useState(null);
+  const [loading, setLoading] = useState(null);
+  const [credentials, setCredentials] = useState(null);
+  const [programmesdata, setProgrammesdata] = useState(null);
+
+  useEffect(() => {
+    loadAnalytics();
+  }, []);
+  async function loadAnalytics() {
+    setLoading(true);
+    const res = await axios.get(`/api/providers/stats/${provider._id}`);
+    setAnalytics(res.data);
+    setCredentials(res.data.credentials[0]?.total_credentials);
+    setProgrammesdata(res.data.totalProgrammes[0]?.total_programmes);
+    setLoading(false);
+  }
   return (
     <div>
       <Head>
@@ -62,20 +80,24 @@ export default function Organization({ provider, programmes }) {
               ) : null}
             </Box>
             <Box sx={{ display: "flex", m: 1 }}>
-              <Typography
-                variant="subtitle1"
-                color="text.secondary"
-                sx={{ mr: 2 }}
-              >
-                30 programmes
-              </Typography>
-              <Typography
-                variant="subtitle1"
-                color="text.secondary"
-                sx={{ mr: 2 }}
-              >
-                378900 credentials issued
-              </Typography>
+              {programmesdata && (
+                <Typography
+                  variant="subtitle1"
+                  color="text.secondary"
+                  sx={{ mr: 2 }}
+                >
+                  {programmesdata} programmes
+                </Typography>
+              )}
+              {credentials && (
+                <Typography
+                  variant="subtitle1"
+                  color="text.secondary"
+                  sx={{ mr: 2 }}
+                >
+                  {credentials} credentials issued
+                </Typography>
+              )}
             </Box>
           </Box>
           {provider.is_accredited ? (
@@ -97,6 +119,9 @@ export default function Organization({ provider, programmes }) {
               </Typography>
             </Box>
           </Paper>
+        </Box>
+        <Box sx={{ mt: 4, ml: 1, mb: 4 }}>
+          <Accreditation documents={provider.documents} />
         </Box>
       </Container>
     </div>

@@ -33,6 +33,7 @@ export default function Provider() {
   const [alert, setAlert] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errors, setErrors] = useState([]);
+  const [errorsUnique, setErrorsUnique] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -83,8 +84,9 @@ export default function Provider() {
       }
     } catch (err) {
       console.log(err);
-      if (err.response) {
-        setErrors(Object.values(err.response.data.errors));
+      if (err) {
+        setErrors(err.response.data.errors);
+        setErrorsUnique(err.response.data);
       }
     }
   };
@@ -147,7 +149,16 @@ export default function Provider() {
                   </Button>
                   <FinishButton finish={finish} handleFinish={handleSubmit} />
                 </Box>
-                <ErrorDisplay errors={errors} />
+                <ErrorDisplay errors={errors && Object.values(errors)} />
+                {errors ? null : errorsUnique ? (
+                  <ErrorDisplay
+                    errors={[
+                      {
+                        message: "An account with that address already exists",
+                      },
+                    ]}
+                  />
+                ) : null}
               </Container>
             )}
           </Container>

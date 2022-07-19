@@ -1,22 +1,19 @@
 import Head from "next/head";
-import Container from "@mui/material/Container";
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
+import InsightsIcon from "@mui/icons-material/Insights";
+import VerifiedOutlinedIcon from "@mui/icons-material/VerifiedOutlined";
+import CardMembershipIcon from "@mui/icons-material/CardMembership";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import Navbar from "../components/layout/Navbar";
 import Grid from "@mui/material/Grid";
 
 export default function Home() {
   const talkingpoints = [
-    "Earn Credentials",
+    "Issue Digital Certificates",
+    "Verify Individuals Credentials",
     "Broadcast Your Skills",
-    "Search For a Job",
-    "Be Discovered By Employers",
-    "Grow Your Skills",
+    "Gain Insightful Data",
   ];
   return (
     <div>
@@ -28,31 +25,40 @@ export default function Home() {
       <Navbar />
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <Box sx={{ ml: 12, mr: 12, mt: 4 }}>
+          <Box sx={{ ml: 12, mr: 6, mt: 3 }}>
             <Typography
               variant="h2"
               component="h1"
               color="primary"
-              sx={{ fontFamily: "Sans" }}
+              sx={{ fontFamily: "sans" }}
             >
-              Level up Your <br />
-              Carrer
+              Verifiable Blockchain Credentials.
             </Typography>
-            <Typography variant="body1" sx={{ mt: 2 }}>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
-              blanditiis tenetur
-            </Typography>
+            <Typography variant="h6" sx={{ mt: 2 }}></Typography>
             {talkingpoints.map((points, index) => (
               <Box
                 sx={{
                   backgroundColor: "#e3f2fd",
                   borderRadius: 2,
-                  p: 1,
+                  p: 1.2,
                   mt: 2,
+                  display: "flex",
                 }}
                 key={index}
               >
-                <Typography variant="body1" sx={{ m: 1 }}>
+                {index === 0 ? (
+                  <CardMembershipIcon sx={{ m: 2, mr: 0 }} />
+                ) : index === 1 ? (
+                  <VerifiedOutlinedIcon sx={{ m: 2, mr: 0 }} />
+                ) : index === 2 ? (
+                  <AccountCircleOutlinedIcon sx={{ m: 2, mr: 0 }} />
+                ) : (
+                  <InsightsIcon sx={{ m: 2, mr: 0 }} />
+                )}
+                <Typography
+                  variant="h6"
+                  sx={{ m: 1, ml: 3, fontFamily: "sans" }}
+                >
                   {points}
                 </Typography>
               </Box>
@@ -60,11 +66,11 @@ export default function Home() {
           </Box>
         </Grid>
         <Grid item xs={6}>
-          <Box sx={{ m: 2, maxWidth: 100 }}>
-            <img src="image.png" style={{ maxWidth: "500px" }} />
+          <Box sx={{ mt: -8, maxWidth: 100, ml: -4 }}>
+            <img src="certificate.png" style={{ maxWidth: "700px" }} />
           </Box>
         </Grid>
-        <Box sx={{ m: 50 }} />
+        <Box sx={{ m: 5 }} />
       </Grid>
     </div>
   );

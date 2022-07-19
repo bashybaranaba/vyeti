@@ -135,6 +135,13 @@ export default function ProviderDashboard({ provider, programmes }) {
         </AppBar>
         <Drawer variant="permanent" open={open}>
           <DrawerHeader>
+            <Typography
+              variant="body1"
+              component="div"
+              sx={{ flexGrow: 1, ml: 2 }}
+            >
+              VYETI .
+            </Typography>
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === "rtl" ? (
                 <ChevronRightIcon />

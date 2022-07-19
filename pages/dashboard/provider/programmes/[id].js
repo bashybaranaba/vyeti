@@ -62,6 +62,7 @@ export default function Programme({ programme, registrants }) {
           <CreateRegistrant
             programmeId={programme._id}
             providerId={programme.provider._id}
+            duration={programme.duration}
           />
         </Box>
         <Box sx={{ mt: 10, position: "fixed" }}>

@@ -38,7 +38,7 @@ export default function EditEmployer({ employer }) {
     try {
       const details = {
         profile_img: fileUrl,
-        organization_name: org,
+        organization_name: orgName,
         bio: bio,
       };
       await axios.put(`/api/employers/${employerId}`, details);
@@ -46,7 +46,9 @@ export default function EditEmployer({ employer }) {
       setOpen(false);
     } catch (err) {
       console.log(err);
-      setErrors(err.response.data.errors);
+      if (err) {
+        setErrors(err.response?.data?.errors);
+      }
     }
   };
 
@@ -91,7 +93,7 @@ export default function EditEmployer({ employer }) {
             rows={6}
             fullWidth
             variant="filled"
-            placeholder="An interesting description of yourself and what you do"
+            placeholder="A beif description of the organization"
             required
             onChange={(e) => setBio(e.target.value)}
             value={bio}
