@@ -78,6 +78,13 @@ export default function VerifyCredential({ credential, data }) {
               Gender: {data.registrant?.gender}
             </Typography>
             <Typography variant="body1" sx={{ ml: 1 }}>
+              Date of Birth:{" "}
+              {dayjs(data.registrant?.date_of_birth).format("MMMM DD YYYY")}
+            </Typography>
+            <Typography variant="body1" sx={{ ml: 1 }}>
+              Birth Certificate: {data.registrant?.birth_certificate}
+            </Typography>
+            <Typography variant="body1" sx={{ ml: 1 }}>
               Enrolled from:{" "}
               {dayjs(data.registrant?.enrollment_date).format("MMMM DD YYYY")} -{" "}
               {dayjs(credential.createdAt).format("MMMM DD YYYY")}
