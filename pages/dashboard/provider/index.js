@@ -28,7 +28,7 @@ import ProgrammeList from "../../../components/programme/ProgrammeList";
 
 import jwt from "jsonwebtoken";
 import ProviderProfile from "../../../components/provider/ProviderProfile";
-import Overview from "../../../components/analytics/OverView";
+import Overview from "../../../components/analytics/Overview";
 import TotalsCard from "../../../components/analytics/TotalsCard";
 import AssessmentIcon from "@mui/icons-material/Assessment";
 
