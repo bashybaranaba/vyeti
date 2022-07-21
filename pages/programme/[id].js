@@ -22,17 +22,15 @@ export default function Programme({ programme }) {
       </Head>
       <Navbar />
       <ProgrammeDetails programme={programme} />
-      <Container maxWidth="md">
-        <Box sx={{ mt: 4, ml: 1, mr: 3 }}>
-          <SearchCredential />
-        </Box>
-      </Container>
+      <Container maxWidth="md"></Container>
     </div>
   );
 }
 
 export const getServerSideProps = async ({ params }) => {
-  const res = await axios.get(`https://vyeti.com/api/programmes/${params.id}`);
+  const res = await axios.get(
+    `https://vyeti.vercel.app/api/programmes/${params.id}`
+  );
   return {
     props: {
       programme: res.data.programme,

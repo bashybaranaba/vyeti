@@ -94,7 +94,9 @@ export const getServerSideProps = async ({ req }) => {
       },
     };
   } else {
-    const res = await axios.get(`https://vyeti.com/api/accounts/${account_id}`);
+    const res = await axios.get(
+      `https://vyeti.vercel.app/api/accounts/${account_id}`
+    );
     return {
       props: {
         email: res.data.account.email,

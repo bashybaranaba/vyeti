@@ -1,10 +1,11 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
+import Grid from "@mui/material/Grid";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
@@ -15,6 +16,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import LinearProgress from "@mui/material/LinearProgress";
 
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import SchoolIcon from "@mui/icons-material/School";
@@ -26,23 +28,34 @@ import ProgrammeList from "../../../components/programme/ProgrammeList";
 
 import jwt from "jsonwebtoken";
 import ProviderProfile from "../../../components/provider/ProviderProfile";
+import Overview from "../../../components/analytics/OverView";
+import TotalsCard from "../../../components/analytics/TotalsCard";
+import AssessmentIcon from "@mui/icons-material/Assessment";
 
 import {
   AppBar,
   Drawer,
   DrawerHeader,
 } from "../../../components/util/NavDrawerOptions";
+import LogOutButton from "../../../components/auth/LogOutButton";
 
 const buttonsinfo = [
   { text: "Institution Profile", link: "/campaigns", value: 0 },
   { text: "Programmes", link: "/contacts", value: 1 },
-  { text: "Archived Items", link: "/messages", value: 2 },
+  { text: "Analytics", link: "/analytics", value: 2 },
+  { text: "Archived Items", link: "/analytics", value: 3 },
 ];
 
 export default function ProviderDashboard({ provider, programmes }) {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
+  const [analytics, setAnalytics] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadAnalytics();
+  }, []);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -51,6 +64,34 @@ export default function ProviderDashboard({ provider, programmes }) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  async function loadAnalytics() {
+    setLoading(true);
+    const res = await axios.get(`/api/providers/stats/${provider._id}`);
+    setAnalytics(res.data);
+    setLoading(false);
+  }
+
+  const getActiveProgrammes = (programmes) => {
+    let programmesArray = [];
+    for (let i = 0; i < programmes.length; i++) {
+      if (programmes[i].is_archived === false) {
+        programmesArray.push(programmes[i]);
+      }
+    }
+    return programmesArray;
+  };
+  const getArchivedProgrammes = (programmes) => {
+    let archivedArray = [];
+    for (let i = 0; i < programmes.length; i++) {
+      if (programmes[i].is_archived === true) {
+        archivedArray.push(programmes[i]);
+      }
+    }
+    return archivedArray;
+  };
+  const activeProgrammes = getActiveProgrammes(programmes);
+  const archivedProgrammes = getArchivedProgrammes(programmes);
 
   const handleChangeValue = (event, newValue) => {
     setValue(newValue);
@@ -78,13 +119,29 @@ export default function ProviderDashboard({ provider, programmes }) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap component="div">
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ flexGrow: 1 }}
+            >
               Dashboard
             </Typography>
+            <Typography variant="body1" component="div" sx={{ mr: 1 }}>
+              {provider.institution_name}
+            </Typography>
+            <LogOutButton />
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
           <DrawerHeader>
+            <Typography
+              variant="body1"
+              component="div"
+              sx={{ flexGrow: 1, ml: 2 }}
+            >
+              VYETI .
+            </Typography>
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === "rtl" ? (
                 <ChevronRightIcon />
@@ -111,11 +168,11 @@ export default function ProviderDashboard({ provider, programmes }) {
                       color={index === value ? "primary" : "inherit"}
                     />
                   ) : index === 2 ? (
-                    <ArchiveIcon
+                    <AssessmentIcon
                       color={index === value ? "primary" : "inherit"}
                     />
                   ) : (
-                    <ClassIcon
+                    <ArchiveIcon
                       color={index === value ? "primary" : "inherit"}
                     />
                   )}
@@ -129,15 +186,47 @@ export default function ProviderDashboard({ provider, programmes }) {
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
           <div hidden={value !== 0}>
-            <ProviderProfile provider={provider} />
+            <ProviderProfile
+              provider={provider}
+              credentials={analytics?.credentials[0]?.total_credentials}
+              programmes={analytics?.totalProgrammes[0]?.total_programmes}
+            />
           </div>
           <div hidden={value !== 1}>
             <CreateProgramme providerId={provider._id} />
-            <ProgrammeList programmes={programmes} />
+            <ProgrammeList programmes={activeProgrammes} />
           </div>
-          <div hidden={value !== 2}>Archived Items</div>
-          <div hidden={value !== 3}>Sth</div>
-          <div hidden={value !== 4}>Archived</div>
+          <div hidden={value !== 2}>
+            {loading ? (
+              <Grid align="center" sx={{ m: 6 }}>
+                <LinearProgress />
+              </Grid>
+            ) : (
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={12} lg={8}>
+                  <Overview analytics={analytics} />
+                </Grid>
+                <Grid item xs={12} sm={12} lg={4}>
+                  <TotalsCard
+                    value={analytics?.credentials[0]?.total_credentials}
+                    label={"Credentials Issued"}
+                  />
+                  <TotalsCard
+                    value={analytics?.totalProgrammes[0]?.total_programmes}
+                    label={"Programmes"}
+                  />
+                  <TotalsCard
+                    value={analytics?.totalRegistrants[0]?.total_registrants}
+                    label={"Total Registrants"}
+                  />
+                </Grid>
+              </Grid>
+            )}
+          </div>
+          <div hidden={value !== 3}>
+            <Typography variant="h6">Archived</Typography>
+            <ProgrammeList programmes={archivedProgrammes} />
+          </div>
         </Box>
       </Box>
     </div>
@@ -176,12 +265,12 @@ export const getServerSideProps = async ({ req }) => {
     };
   } else {
     const account = await axios.get(
-      `https://vyeti.com/api/accounts/providers/${account_id}`
+      `https://vyeti.vercel.app/api/accounts/providers/${account_id}`
     );
     const providerId = account.data.provider._id;
 
     const res = await axios.get(
-      `https://vyeti.com/api/providers/${providerId}`
+      `https://vyeti.vercel.app/api/providers/${providerId}`
     );
     return {
       props: {

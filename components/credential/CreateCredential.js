@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import Grid from "@mui/material/Grid";
+import LinearProgress from "@mui/material/LinearProgress";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import DialogActions from "@mui/material/DialogActions";
@@ -53,6 +54,7 @@ export default function CreateCredential({ registrantId }) {
   const [next, setNext] = useState(false);
   const [finish, setFinish] = useState(false);
   const [alert, setAlert] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState([]);
@@ -157,12 +159,17 @@ export default function CreateCredential({ registrantId }) {
         signer
       );
       let transaction = await contract.createCredentialToken(url);
-      let tx = await transaction.wait();
-      let event = tx.events[0];
-      let value = event.args[2];
-      let tokenId = value.toNumber();
+      setLoading(true);
+      await transaction.wait().then((tx) => {
+        console.log("This Tx", tx);
+        let event = tx.events[0];
+        console.log("This Event", event);
+        console.log("This Args", event.args);
+        let value = event.args[2];
 
-      if (tokenId) {
+        console.log("This Value", value);
+        let tokenId = value.toNumber();
+        console.log("This TokenId", tokenId);
         const data = {
           tokenId: tokenId,
           programme: programmeId,
@@ -178,8 +185,8 @@ export default function CreateCredential({ registrantId }) {
           description: description,
         };
         console.log(data);
-        await axios.post(`/api/credentials`, data);
-        await axios.post(`/api/mails/credentials`, data);
+        axios.post(`/api/credentials`, data);
+        axios.post(`/api/mails/credentials`, data);
         setOpen(false);
         setTitle("");
         setFullName("");
@@ -192,8 +199,9 @@ export default function CreateCredential({ registrantId }) {
         setNoOfsignatures(1);
         setSuccess(true);
         setMessage("Credential Issued Successfully");
+        setLoading(false);
         setAlert(true);
-      }
+      });
 
       console.log("Success", event);
     } catch (error) {
@@ -231,6 +239,11 @@ export default function CreateCredential({ registrantId }) {
           </DialogActions>
           <Container maxWidth="sm">
             <Grid align="center">
+              {loading ? (
+                <Grid align="center" sx={{ m: 6 }}>
+                  <LinearProgress />
+                </Grid>
+              ) : null}
               <Typography variant="h6" sx={{ m: 1 }}>
                 {" "}
                 Award Credential

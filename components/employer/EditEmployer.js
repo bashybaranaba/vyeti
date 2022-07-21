@@ -16,12 +16,11 @@ import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
 import ImageUpload from "../util/ImageUpload";
 
-export default function EditEarner({ earner }) {
+export default function EditEmployer({ employer }) {
   const [open, setOpen] = useState(false);
-  const [fileUrl, setFileUrl] = useState(earner.profile_img);
-  const [firstname, setFirstName] = useState(earner.first_name);
-  const [lastname, setLastName] = useState(earner.last_name);
-  const [bio, setBio] = useState(earner.bio);
+  const [fileUrl, setFileUrl] = useState(employer.profile_img);
+  const [orgName, setOrgName] = useState(employer.organization_name);
+  const [bio, setBio] = useState(employer.bio);
   const router = useRouter();
   const [errors, setErrors] = useState([]);
 
@@ -35,20 +34,21 @@ export default function EditEarner({ earner }) {
 
   const saveDetails = async (e) => {
     e.preventDefault();
-    const earnerId = earner._id;
+    const employerId = employer._id;
     try {
       const details = {
         profile_img: fileUrl,
-        first_name: firstname,
-        last_name: lastname,
+        organization_name: orgName,
         bio: bio,
       };
-      await axios.put(`/api/earners/${earnerId}`, details);
+      await axios.put(`/api/employers/${employerId}`, details);
       router.replace(router.asPath);
       setOpen(false);
     } catch (err) {
       console.log(err);
-      setErrors(err.response.data.errors);
+      if (err) {
+        setErrors(err.response?.data?.errors);
+      }
     }
   };
 
@@ -65,39 +65,25 @@ export default function EditEarner({ earner }) {
       </Tooltip>
 
       <Dialog fullWidth maxWidth="md" open={open} onClose={handleClose}>
-        <DialogTitle> Edit Your Profile</DialogTitle>
+        <DialogTitle> Edit Organization Profile</DialogTitle>
         <DialogContent>
           <ImageUpload setFileUrl={setFileUrl} fileUrl={fileUrl} />
           <TextField
             autoFocus
             margin="dense"
-            id="name"
-            label="First name"
+            id="org-name"
+            label="Organization name"
             fullWidth
             variant="filled"
             required
-            onChange={(e) => setFirstName(e.target.value)}
-            value={firstname}
+            onChange={(e) => setOrgName(e.target.value)}
+            value={orgName}
           />
           <Typography variant="caption" sx={{ color: "red" }}>
-            {errors?.first_name?.message}
+            {errors?.organization_name?.message}
           </Typography>
 
           <Box sx={{ m: 2 }} />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Last name"
-            fullWidth
-            variant="filled"
-            required
-            onChange={(e) => setLastName(e.target.value)}
-            value={lastname}
-          />
-          <Typography variant="caption" sx={{ color: "red" }}>
-            {errors?.last_name?.message}
-          </Typography>
 
           <Box sx={{ m: 2 }} />
           <TextField
@@ -107,7 +93,7 @@ export default function EditEarner({ earner }) {
             rows={6}
             fullWidth
             variant="filled"
-            placeholder="An interesting description of yourself and what you do"
+            placeholder="A beif description of the organization"
             required
             onChange={(e) => setBio(e.target.value)}
             value={bio}

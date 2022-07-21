@@ -6,6 +6,7 @@ const registrantSchema = new mongoose.Schema(
     fullname: {
       type: String,
       required: [true, "Please enter registrant's full name"],
+      minLength: [2, "Full Name should contain at least two characters"],
     },
     email: {
       type: String,
@@ -14,7 +15,6 @@ const registrantSchema = new mongoose.Schema(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         "Please provide a valid email",
       ],
-      unique: true,
     },
     phone: {
       type: String,

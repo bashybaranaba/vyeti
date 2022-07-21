@@ -39,6 +39,7 @@ export default function VerifyCredential({ credential, data }) {
               Institution name:{" "}
               <a
                 href={`/org/${data.institution.slug}`}
+                target="blank"
                 style={{ color: "#4D776D" }}
               >
                 {data.institution?.institution_name}
@@ -57,6 +58,7 @@ export default function VerifyCredential({ credential, data }) {
               <a
                 href={`/programme/${data.programme._id}`}
                 style={{ color: "#4D776D" }}
+                target="blank"
               >
                 {data.programme?.programme_name}
               </a>
@@ -74,6 +76,13 @@ export default function VerifyCredential({ credential, data }) {
             </Typography>
             <Typography variant="body1" sx={{ ml: 1 }}>
               Gender: {data.registrant?.gender}
+            </Typography>
+            <Typography variant="body1" sx={{ ml: 1 }}>
+              Date of Birth:{" "}
+              {dayjs(data.registrant?.date_of_birth).format("MMMM DD YYYY")}
+            </Typography>
+            <Typography variant="body1" sx={{ ml: 1 }}>
+              Birth Certificate: {data.registrant?.birth_certificate}
             </Typography>
             <Typography variant="body1" sx={{ ml: 1 }}>
               Enrolled from:{" "}

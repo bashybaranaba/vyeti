@@ -9,8 +9,9 @@ import VerifiedIcon from "@mui/icons-material/Verified";
 import EditProvider from "./EditProvider";
 import Accredit from "./Accredit";
 import ReportGmailerrorredIcon from "@mui/icons-material/ReportGmailerrorred";
+import Accreditation from "./Accreditation";
 
-export default function ProviderProfile({ provider }) {
+export default function ProviderProfile({ provider, credentials, programmes }) {
   return (
     <Container maxWidth="lg">
       <Box sx={{ mt: 3 }}>
@@ -55,20 +56,24 @@ export default function ProviderProfile({ provider }) {
             <EditProvider provider={provider} />
           </Box>
           <Box sx={{ display: "flex", m: 1 }}>
-            <Typography
-              variant="subtitle1"
-              color="text.secondary"
-              sx={{ mr: 2 }}
-            >
-              30 programmes
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              color="text.secondary"
-              sx={{ mr: 2 }}
-            >
-              378900 credentials issued
-            </Typography>
+            {programmes && (
+              <Typography
+                variant="subtitle1"
+                color="text.secondary"
+                sx={{ mr: 2 }}
+              >
+                {programmes} programmes
+              </Typography>
+            )}
+            {credentials && (
+              <Typography
+                variant="subtitle1"
+                color="text.secondary"
+                sx={{ mr: 2 }}
+              >
+                {credentials} credentials issued
+              </Typography>
+            )}
           </Box>
         </Box>
         {provider.is_accredited ? (
@@ -99,6 +104,11 @@ export default function ProviderProfile({ provider }) {
           )}
         </Paper>
       </Box>
+      {provider.is_accredited ? (
+        <Box sx={{ mt: 4, ml: 1 }}>
+          <Accreditation documents={provider.documents} />
+        </Box>
+      ) : null}
     </Container>
   );
 }

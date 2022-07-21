@@ -114,7 +114,9 @@ export default function CredentialPage({ tokenId, data }) {
 }
 
 export const getServerSideProps = async ({ params }) => {
-  const res = await axios.get(`https://vyeti.com/api/credentials/${params.id}`);
+  const res = await axios.get(
+    `https://vyeti.vercel.app/api/credentials/${params.id}`
+  );
   return {
     props: {
       tokenId: params.id,

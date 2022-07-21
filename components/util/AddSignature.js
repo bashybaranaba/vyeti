@@ -54,8 +54,8 @@ export default function AddSignature(props) {
   return (
     <div>
       <TextField
-        id="name"
-        label="Name"
+        id="signatory"
+        label="Signatory"
         variant="outlined"
         fullWidth
         sx={{ m: 1 }}

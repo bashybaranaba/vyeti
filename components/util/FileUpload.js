@@ -10,7 +10,6 @@ import Paper from "@mui/material/Paper";
 import { useState } from "react";
 import { create as ipfsHttpClient } from "ipfs-http-client";
 import ClearIcon from "@mui/icons-material/Clear";
-import CameraEnhanceIcon from "@mui/icons-material/CameraEnhance";
 import TextField from "@mui/material/TextField";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 
@@ -31,8 +30,8 @@ export default function FileUpload({ getFileDetails }) {
 
       const url = `https://ipfs.infura.io/ipfs/${added.path}`;
       const fileDetails = {
-        fileUrl: url,
-        fileType: type_of_file,
+        file_url: url,
+        file_type: type_of_file,
         description: fileName,
       };
       setFileUrl(url);
@@ -131,13 +130,7 @@ export default function FileUpload({ getFileDetails }) {
               </Typography>
             </Container>
           </Box>
-          <input
-            type="file"
-            accept="image/*"
-            id="file-input"
-            hidden
-            onChange={uploadFile}
-          />
+          <input type="file" id="file-input" hidden onChange={uploadFile} />
         </div>
       )}
     </div>

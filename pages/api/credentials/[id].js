@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     try {
       const credential = await Credential.findOne({ tokenId: id }).populate(
         "institution programme registrant",
-        "_id institution_name slug programme_name wallet gender enrollment_date completion_date"
+        "_id institution_name slug programme_name wallet gender enrollment_date completion_date date_of_birth birth_certificate"
       );
       res.status(200).json({ credential });
     } catch (err) {

@@ -26,7 +26,7 @@ export default async function handler(req, res) {
                       <h3>Thank you for Registering to Vyeti!</h3>
                       <div style=" padding-left:4%; padding-right:4%;">
                         <p style="font-size: 16px;">Click the button below to verify your email address</p>
-                        <a style="color: white; text-decoration:none;" href="http://vyeti.com/verifyaccount/${token}">
+                        <a style="color: white; text-decoration:none;" href="https://vyeti.vercel.app//verifyaccount/${token}">
                           <div style="margin:10px; width:100px; background-color:#4D776D; border-radius:8px;">
                           <p style="font-size: 16px; padding:0.5px;">Verify</p>
                           </div>

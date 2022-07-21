@@ -6,10 +6,15 @@ const employerSchema = new mongoose.Schema(
     organization_name: {
       type: String,
       required: [true, "Please enter the organization name"],
+      minLength: [
+        2,
+        "Organization Name should contain at least two characters",
+      ],
     },
     contact_person: {
       type: String,
       required: [true, "Please enter your full name"],
+      minLength: [2, "Full Name should contain at least two characters"],
     },
     accountId: {
       type: ObjectId,
@@ -32,6 +37,7 @@ const employerSchema = new mongoose.Schema(
     phone: {
       type: String,
       required: [true, "Please provide telephone or mobile number"],
+      minLength: [7, "Phone number length is shorter than expected"],
     },
     physical_address: {
       type: String,

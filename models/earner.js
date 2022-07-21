@@ -6,10 +6,12 @@ const earnerSchema = new mongoose.Schema(
     first_name: {
       type: String,
       required: [true, "Please enter your first name"],
+      minLength: [2, "First Name should contain at least two characters"],
     },
     last_name: {
       type: String,
       required: [true, "Please enter your last name"],
+      minLength: [2, "Last Name should contain at least two characters"],
     },
     accountId: {
       type: ObjectId,

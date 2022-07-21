@@ -1,2 +1,2 @@
 export const credentialsRegistryAddress =
-  "0xBF3BEd82587e9af532B0E7dc6153c24Bb680c5CB";
+  "0x32c595b131133cF7babd0E0ca05870998dF11705";

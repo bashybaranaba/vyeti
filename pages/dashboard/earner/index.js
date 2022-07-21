@@ -120,11 +120,13 @@ export const getServerSideProps = async ({ req }) => {
     };
   } else {
     const account = await axios.get(
-      `https://vyeti.com/api/accounts/earners/${account_id}`
+      `https://vyeti.vercel.app/api/accounts/earners/${account_id}`
     );
     const earnerId = account.data.earner._id;
 
-    const res = await axios.get(`https://vyeti.com/api/earners/${earnerId}`);
+    const res = await axios.get(
+      `https://vyeti.vercel.app/api/earners/${earnerId}`
+    );
     return {
       props: {
         earner: res.data.earner,
