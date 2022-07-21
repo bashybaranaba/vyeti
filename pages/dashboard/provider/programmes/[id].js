@@ -19,7 +19,7 @@ import EditProgramme from "../../../../components/programme/EditProgramme";
 import RegistrantsTable from "../../../../components/registrant/RegistrantsTable";
 import ArchiveProgramme from "../../../../components/programme/ArchiveProgramme";
 import UnarchiveProgramme from "../../../../components/programme/UnarchiveProgramme";
-import Overview from "../../../../components/analytics/OverView";
+import Overview from "../../../../components/analytics/Overview";
 import TotalsCard from "../../../../components/analytics/TotalsCard";
 function a11yProps(index) {
   return {
