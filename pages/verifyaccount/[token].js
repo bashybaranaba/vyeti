@@ -96,7 +96,7 @@ export const getServerSideProps = async ({ req, params }) => {
     };
   } else {
     const res = await axios.get(
-      `http://localhost:3000/api/accounts/${account_id}`
+      `https://vyeti.vercel.app/api/accounts/${account_id}`
     );
     const verification_token = res.data.account.verification_token;
     if (verification_token === params.token) {

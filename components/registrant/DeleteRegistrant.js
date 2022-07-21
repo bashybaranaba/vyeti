@@ -82,7 +82,7 @@ export default function DeleteRegistrant({ registrantId }) {
             <div>
               <DialogContentText>
                 Are you sure you want to delete{" "}
-                <strong>{registrantName}</strong>? Type the individual's name to
+                <strong>{registrantName}</strong>? Type the individuals name to
                 confirm deletion.
               </DialogContentText>
               <Box sx={{ m: 2 }} />

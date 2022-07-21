@@ -130,7 +130,7 @@ export default function Organization({ provider, programmes }) {
 
 export const getServerSideProps = async ({ params }) => {
   const res = await axios.get(
-    `http://localhost:3000/api/providers/org/${params.slug}`
+    `https://vyeti.vercel.app/api/providers/org/${params.slug}`
   );
   return {
     props: {

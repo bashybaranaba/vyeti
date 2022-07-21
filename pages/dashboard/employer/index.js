@@ -126,15 +126,15 @@ export const getServerSideProps = async ({ req }) => {
     };
   } else {
     const account = await axios.get(
-      `http://localhost:3000/api/accounts/employers/${account_id}`
+      `https://vyeti.vercel.app/api/accounts/employers/${account_id}`
     );
     const employerId = account.data.employer._id;
 
     const res = await axios.get(
-      `http://localhost:3000/api/employers/${employerId}`
+      `https://vyeti.vercel.app/api/employers/${employerId}`
     );
     const credentials = await axios.get(
-      `http://localhost:3000/api/credentials`
+      `https://vyeti.vercel.app/api/credentials`
     );
 
     return {

@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import LibraryAddCheckIcon from "@mui/icons-material/LibraryAddCheck";
+import Link from "next/link";
 
 export default function SideSection() {
   return (
@@ -17,7 +18,9 @@ export default function SideSection() {
     >
       <Box sx={{ m: 4 }}>
         <Typography variant="h5" component="div" sx={{ color: "#fff" }}>
-          VYETI .
+          <Link href="/">
+            <a style={{ textDecoration: "none", color: "#fff" }}>VYETI .</a>
+          </Link>
         </Typography>
       </Box>
       <Box sx={{ m: 4 }} />

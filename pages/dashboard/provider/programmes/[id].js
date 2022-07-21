@@ -146,7 +146,7 @@ export default function Programme({ programme, registrants }) {
 
 export const getServerSideProps = async ({ params }) => {
   const res = await axios.get(
-    `http://localhost:3000/api/programmes/${params.id}`
+    `https://vyeti.vercel.app/api/programmes/${params.id}`
   );
   return {
     props: {

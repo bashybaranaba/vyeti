@@ -54,28 +54,25 @@ export default function Navbar({ displayname }) {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>
-        <a
-          style={{ color: "black", textDecoration: "none" }}
-          href="/register/provider"
-        >
-          Register as Issuing Institution
-        </a>
+        <Link href="/register/provider">
+          <a style={{ color: "black", textDecoration: "none" }}>
+            Register as Issuing Institution
+          </a>
+        </Link>
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
-        <a
-          style={{ color: "black", textDecoration: "none" }}
-          href="/register/employer"
-        >
-          Register as Hiring Institution
-        </a>
+        <Link href="/register/employer">
+          <a style={{ color: "black", textDecoration: "none" }}>
+            Register as Hiring Institution
+          </a>
+        </Link>
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
-        <a
-          style={{ color: "black", textDecoration: "none" }}
-          href="/register/earner"
-        >
-          Register as an Individual{" "}
-        </a>
+        <Link href="/register/earner">
+          <a style={{ color: "black", textDecoration: "none" }}>
+            Register as an Individual
+          </a>
+        </Link>
       </MenuItem>
     </Menu>
   );
@@ -87,9 +84,11 @@ export default function Navbar({ displayname }) {
           {authenticated ? (
             <Toolbar>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                <a href="/" style={{ textDecoration: "none", color: "#fff" }}>
-                  VYETI .
-                </a>
+                <Link href="/">
+                  <a style={{ textDecoration: "none", color: "#fff" }}>
+                    VYETI .
+                  </a>
+                </Link>
               </Typography>
 
               <Typography variant="body1" component="div" sx={{ mr: 1 }}>
@@ -101,9 +100,11 @@ export default function Navbar({ displayname }) {
           ) : (
             <Toolbar>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                <a href="/" style={{ textDecoration: "none", color: "#fff" }}>
-                  VYETI .
-                </a>
+                <Link href="/">
+                  <a style={{ textDecoration: "none", color: "#fff" }}>
+                    VYETI .
+                  </a>
+                </Link>
               </Typography>
               <Button onClick={handleMenuOpen} color="inherit">
                 Register

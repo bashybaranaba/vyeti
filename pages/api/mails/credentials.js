@@ -35,8 +35,8 @@ export default async function handler(req, res) {
                         </div>
                       </div>
                       <div style=" padding-left:4%; padding-right:4%;">
-                        <p style="font-size: 16px;">Follow this link to the vyeti website to claim your credential: <a style="color: black;" href="http://localhost:3000/dashboard/earner">Claim Credential</a></p>
-                        <p style="font-size: 16px;">If you don't have a Vyeti account click the following link to <a style="color: black;" href="http://localhost:3000/register/earner">Create Account</a> and use the email used to receive this message to create your account</p>
+                        <p style="font-size: 16px;">Follow this link to the vyeti website to claim your credential: <a style="color: black;" href="https://vyeti.vercel.app/dashboard/earner">Claim Credential</a></p>
+                        <p style="font-size: 16px;">If you don't have a Vyeti account click the following link to <a style="color: black;" href="https://vyeti.vercel.app/register/earner">Create Account</a> and use the email used to receive this message to create your account</p>
                         <p style="font-size: 16px;">From there you can share your earned credential around different social media</p>
                       </div>
                   </div>
